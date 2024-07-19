@@ -15,34 +15,33 @@ Nilai 7  merupakan jumlah atau sum dari subarray  [ 4, -1, -2, 1, 5]
  */
 
 function subArray(arr) {
-    let hasilAkhir = 0;
-    let maxTemp = 0;
-    let arrHasil = [[],];
-    let arrTest = [];
-    let arrTemp = [];
-    let index = 0;
+    let hasilAkhir = 0; //value total final
+    let maxTemp = 0; //value total temp
+    let arrTest = []; //array 2d temp
+    let arrTemp = []; //array single
     for (let i = 0; i < arr.length; i++){        
         maxTemp = arr[i]; 
         arrTemp.push(arr[i]);   
         for (let j = i; j < arr.length; j++){
             if (j != i){
                 maxTemp += arr[j]; 
-                if (hasilAkhir < maxTemp){
-                    hasilAkhir = maxTemp;
-                }                  
-                arrHasil = [[],];  
-                //------------                                 
+                // //------------                                 
                 arrTemp.push(arr[j]); 
-                arrTest[index] = arrTemp;              
-                index++;      
+                let z = [...arrTemp];
+                arrTest.push([z,maxTemp]);  
             }          
-        }
+        }         
         arrTemp = [];                              
     }
-    arrHasil[0] = arrTest[16];
-    arrHasil.splice(1,0,hasilAkhir);
-    arrHasil[0].pop();
-    return arrHasil;
+    hasilAkhir = arrTest[0][1];
+    var indexTemp = 0;
+    for (let y = 1; y < arrTest.length; y++){
+        if (arrTest[y][1] > hasilAkhir){
+            hasilAkhir = arrTest[y][1];
+            indexTemp = y;
+        }
+    }
+    return arrTest[indexTemp];
 }
 
 // Test Case
